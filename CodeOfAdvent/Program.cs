@@ -11,8 +11,8 @@ namespace CodeOfAdvent
     {
         static void Main(string[] args)
         {
-            var initialInputs = File.ReadAllLines("D:\\AdventOfCodeDay4.txt").ToList();
-            DayFour.Run(initialInputs);
+            var initialInputs = File.ReadAllLines("InputDay5.txt").ToList();
+            DayFive.Run(initialInputs);
         }
 
         private static void DayThree(List<string> initialInputs)
