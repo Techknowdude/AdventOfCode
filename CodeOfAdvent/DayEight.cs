@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace CodeOfAdvent
 {
@@ -6,7 +7,7 @@ namespace CodeOfAdvent
     {
         public void Run(List<string> inputs)
         {
-            throw new System.NotImplementedException();
+            inputs = inputs[0].Split(' ').ToList();
         }
     }
 }

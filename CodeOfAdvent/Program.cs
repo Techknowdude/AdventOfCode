@@ -10,19 +10,15 @@ namespace CodeOfAdvent
     {
         static void Main(string[] args)
         {
-            var initialInputs =  File.ReadAllLines("InputDay7.txt").ToList();//GetExampleInput();//
-            new DaySeven().Run(initialInputs);
+            bool testing = true;
+
+            var initialInputs = testing ? GetExampleInput() : File.ReadAllLines("InputDay8.txt").ToList();
+            new DayEight().Run(new List<string>() { @"2 3 0 3 10 11 12 1 1 0 1 99 2 1 1 2"});
         }
 
         private static List<string> GetExampleInput()
         {
-            return @"Step C must be finished before step A can begin.
-Step C must be finished before step F can begin.
-Step A must be finished before step B can begin.
-Step A must be finished before step D can begin.
-Step B must be finished before step E can begin.
-Step D must be finished before step E can begin.
-Step F must be finished before step E can begin.".Split(new char[] {'\n'}).ToList();
+            return @"2 3 0 3 10 11 12 1 1 0 1 99 2 1 1 2".Split(new char[] {' '}).ToList();
         }
     }
 }
