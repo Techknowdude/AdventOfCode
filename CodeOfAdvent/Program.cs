@@ -10,7 +10,7 @@ namespace CodeOfAdvent
     {
         static void Main(string[] args)
         {
-            var initialInputs = GetExampleInput();// File.ReadAllLines("InputDay6.txt").ToList();
+            var initialInputs =  File.ReadAllLines("InputDay7.txt").ToList();//GetExampleInput();//
             new DaySeven().Run(initialInputs);
         }
 
