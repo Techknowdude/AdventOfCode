@@ -10,10 +10,10 @@ namespace CodeOfAdvent
     {
         static void Main(string[] args)
         {
-            bool testing = true;
+            bool testing = false;
 
             var initialInputs = testing ? GetExampleInput() : File.ReadAllLines("InputDay8.txt").ToList();
-            new DayEight().Run(new List<string>() { @"2 3 0 3 10 11 12 1 1 0 1 99 2 1 1 2"});
+            new DayEight().Run(initialInputs);
         }
 
         private static List<string> GetExampleInput()
