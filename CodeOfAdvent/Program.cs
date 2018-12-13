@@ -10,15 +10,15 @@ namespace CodeOfAdvent
     {
         static void Main(string[] args)
         {
-            bool testing = false;
+            bool testing = true;
 
-            var initialInputs = testing ? GetExampleInput() : File.ReadAllLines("InputDay8.txt").ToList();
-            new DayEight().Run(initialInputs);
+            var initialInputs = testing ? GetExampleInput() : File.ReadAllLines("InputDay9.txt").ToList();
+            new DayNine().Run(initialInputs);
         }
 
         private static List<string> GetExampleInput()
         {
-            return @"2 3 0 3 10 11 12 1 1 0 1 99 2 1 1 2".Split(new char[] {' '}).ToList();
+            return @"10 players; last marble is worth 1618 points: high score is 8317".Split(new char[] {' '}).ToList();
         }
     }
 }
