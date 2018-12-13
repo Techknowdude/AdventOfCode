@@ -10,7 +10,7 @@ namespace CodeOfAdvent
     {
         static void Main(string[] args)
         {
-            bool testing = true;
+            bool testing = false;
 
             var initialInputs = testing ? GetExampleInput() : File.ReadAllLines("InputDay9.txt").ToList();
             new DayNine().Run(initialInputs);
@@ -18,7 +18,7 @@ namespace CodeOfAdvent
 
         private static List<string> GetExampleInput()
         {
-            return @"10 players; last marble is worth 1618 points: high score is 8317".Split(new char[] {' '}).ToList();
+            return new List<string>() {@"30 players; last marble is worth 5807 points: high score is 37305",};
         }
     }
 }
