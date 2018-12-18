@@ -21,28 +21,43 @@ namespace CodeOfAdvent
                 particles.Add(new Particle(input));
             }
             
-            int lastGroupCount = int.MaxValue;
-            var groupCount = lastGroupCount-1;
             string lastBestDisplay = "";
+            int currentHeight= Int32.MaxValue;
+            int lastHeight = currentHeight-1;
+
+            // find ballpark of number
+            //while (lastHeight < currentHeight)
+            //{
+            //    currentHeight = lastHeight;
+            //    ++loopCount;
+            //    particles.ForEach(p => p.Move());
+            //    UpdateBounds(particles);
+
+            //    lastHeight = GetHeight();
+            //}
 
             int loopCount = 0;
 
-            while (groupCount <= lastGroupCount)
+            for (int looper = 0; looper < 10000; looper++, loopCount++)
             {
-                ++loopCount;
+                particles.ForEach(p => p.Move());
+            }
+
+            while (true)
+            {
+                // cycle though and check manually.
                 particles.ForEach(p => p.Move());
                 UpdateBounds(particles);
 
-                lastGroupCount = groupCount;
-                groupCount = GetGroupCount(particles);
+                lastBestDisplay = PrintMap(particles.OrderBy(p => p.Location.X).ThenBy(p => p.Location.Y).ToList());
+                DisplayGuess(lastBestDisplay);
+                loopCount++;
             }
+        }
 
-            particles.ForEach(p => p.MoveBack());
-            UpdateBounds(particles);
-
-            lastBestDisplay = PrintMap(particles.OrderBy(p => p.Location.X).ThenBy(p => p.Location.Y).ToList());
-            DisplayGuess(lastBestDisplay);
-
+        private int GetHeight()
+        {
+            return Math.Abs(Location.LowY - Location.HighY);
         }
 
         private void DisplayGuess(string lastBestDisplay)
