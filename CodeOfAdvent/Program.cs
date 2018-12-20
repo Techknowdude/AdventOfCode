@@ -10,7 +10,7 @@ namespace CodeOfAdvent
     {
         static void Main(string[] args)
         {
-            bool testing = true;
+            bool testing = false;
 
             var initialInputs = testing ? GetExampleInput() : File.ReadAllLines("InputDay10.txt").ToList();
             new DayTen().Run(initialInputs);

@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Policy;
+using System.Text;
 
 namespace CodeOfAdvent
 {
     public class DayTen : ICodingDay
     {
         public void Run(List<string> inputs)
-        {   
+        {
+            bool printing = true;
             //       0        1   2    3        4   5
             // ex: position=< 7,  0> velocity=<-1,  0>
             var particles = new List<Particle>();
@@ -18,29 +20,48 @@ namespace CodeOfAdvent
                 particles.Add(new Particle(input));
             }
 
-            var map = new char[Location.HighX][];
-            for (int index = 0; index < map.Length; index++)
+            while (printing)
             {
-                map[index] = Enumerable.Repeat(' ', Location.HighY).ToArray();
-            }
-
-            while (true)
-            {
-                PrintMap(map, particles);
+                PrintMap(particles);
                 particles.ForEach(p => p.Move());
             }
-
-            Console.WriteLine();
         }
 
-        private void PrintMap(char[][] map, List<Particle> particles)
+        private void PrintMap(List<Particle> particles)
         {
-            //clear the map
-            for (int index = 0; index < map.Length; index++)
+            StringBuilder builder = new StringBuilder();
+
+            for (int row = 0; row < Location.HighY; row++)
             {
-                map[index] = Enumerable.Repeat(' ', Location.HighY).ToArray();
-                var row = map[index];
+                var rowParticles = particles.Where(p => p.Location.Y == row).OrderBy(p => p.Location.X).ToList();
+                if (rowParticles.Any())
+                {
+                    for (int col = 0; col < Location.HighX; col++)
+                    {
+                        if(rowParticles.Any())
+                        {
+                            var particle = rowParticles.FirstOrDefault(p => p.Location.X == col);
+                            if (particle != null)
+                            {
+                                builder.Append('#');
+                                rowParticles.Remove(particle);
+                            }
+                        }
+                        else
+                        {
+                            builder.Append(' ');
+                        }
+                    }
+                builder.AppendLine();
+                }
+                else
+                {
+                builder.AppendLine();
+
+                }
             }
+
+            Console.WriteLine(builder.ToString());
         }
 
 
