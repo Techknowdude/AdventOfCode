@@ -12,8 +12,8 @@ namespace CodeOfAdvent
         {
             bool testing = false;
 
-            var initialInputs = testing ? GetExampleInput() : File.ReadAllLines("InputDay11.txt").ToList();
-            new DayEleven().Run(initialInputs);
+            var initialInputs = testing ? GetExampleInput() : File.ReadAllLines("InputDay12.txt").ToList();
+            new DayTwelve().Run(initialInputs);
         }
 
         private static List<string> GetExampleInput()

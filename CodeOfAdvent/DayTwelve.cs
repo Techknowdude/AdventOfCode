@@ -1,14 +1,42 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace CodeOfAdvent
 {
     public class DayTwelve : ICodingDay
     {
+        public int NumberOfPots = 100;
+
         public void Run(List<string> inputs)
         {
-            throw new System.NotImplementedException();
+            List<string> rules = new List<string>();
+            // first is the initial.
+            var initial = inputs[0];
+            var pots = initial.Substring("initial state: ".Length).ToCharArray();
+
+
+            foreach (var input in inputs.GetRange(2,inputs.Count-2))
+            {
+                //"####. => #"
+                var parsed = input.Split(new[] {"=>"}, StringSplitOptions.RemoveEmptyEntries);
+                if (parsed[1] == "#")
+                {
+                    rules.Add(parsed[0]);
+                }
+            }
+
+            // loop and check all rules
+            for (int generation = 0; generation < 20; generation++)
+            {
+                foreach (var pot in pots)
+                {
+
+                }
+            }
         }
+
     }
+    
 
     /*
      * --- Day 12: Subterranean Sustainability ---
