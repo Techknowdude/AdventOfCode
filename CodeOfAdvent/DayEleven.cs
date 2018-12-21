@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Runtime.Remoting.Messaging;
 
 namespace CodeOfAdvent
@@ -9,12 +10,14 @@ namespace CodeOfAdvent
     {
         protected const int MaxX = 300-2;
         protected const int MaxY = 300-2;
-        protected const int MinX = 1;
-        protected const int MinY = 1;
+        protected const int MinX = 0;
+        protected const int MinY = 0;
 
         public void Run(List<string> inputs)
         {
-            int serialNo = Convert.ToInt32(inputs[0]);
+            // 90,269,16 for #18
+            //232,251,12 for #42
+            int serialNo = 18;//Convert.ToInt32(inputs[0]);
 
             DoTests();
             int highestPower = Int32.MinValue;
@@ -28,8 +31,8 @@ namespace CodeOfAdvent
                     int powerAtPosition = GetPowerInArea(x, y, serialNo, 3);
                     if (powerAtPosition > highestPower)
                     {
-                        bestX = x;
-                        bestY = y;
+                        bestX = x-1;
+                        bestY = y-1;
                         highestPower = powerAtPosition;
                     }
                 }
@@ -47,27 +50,54 @@ namespace CodeOfAdvent
             For grid serial number 42, the largest total square (with a total power of 119) is 12x12 and has a top-left corner of 232,251, so its identifier is 232,251,12.
             */
             highestPower = Int32.MinValue;
-
-            for (int x = MinX; x < MaxX; x++)
+            int bestSize = 0;
+            var map = new int[300][];
+            for (int x = 0; x < map.Length; x++)
             {
-                for (int y = MinY; y < MaxY; y++)
+                map[x] = new int[300];
+                for (int y = 0; y < 300; y++)
                 {
-                    int maxSize = Math.Min(MaxX - x, MaxY - y);
+                    map[x][y] = GetPowerLevel(x, y, serialNo);
+                }
+            }
+
+            for (int x = MinX; x < 300; x++)
+            {
+                for (int y = MinY; y < 300; y++)
+                {
+                    int maxSize = Math.Min(300 - x, 300 - y);
 
                     for (int size = 1; size < maxSize; size++)
                     {
-                        int powerAtPosition = GetPowerInArea(x, y, serialNo, size);
+                        int powerAtPosition = GetPowerInArea(x, y, map, size);
                         if (powerAtPosition > highestPower)
                         {
-                            bestX = x;
-                            bestY = y;
+                            bestX = x+1;
+                            bestY = y+1;
                             highestPower = powerAtPosition;
+                            bestSize = size;
                         }
                     }
                 }
             }
 
-            Console.WriteLine(highestPower);
+
+            Console.WriteLine($"{bestX},{bestY},{bestSize}");
+        }
+
+        private int GetPowerInArea(int x, int y, int[][] map, int squareSize)
+        {
+            int power = 0;
+            if (squareSize + x > 300 || squareSize + y > 300) return 0;
+
+            for (int xLoc = x; xLoc < x + squareSize; xLoc++)
+            {
+                for (int yLoc = y; yLoc < y + squareSize; yLoc++)
+                {
+                    power += map[xLoc][yLoc];
+                }
+            }
+            return power;
         }
 
 
